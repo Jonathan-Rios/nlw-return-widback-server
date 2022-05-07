@@ -8,5 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"] //Incluir somente a src na transpilação
 }
