@@ -62,7 +62,7 @@ Onde se espera um Body <strong>JSON</strong> do seguinte formato, sendo screensh
 }
 ```
 
-Caso queira ver em funcionamento total, veja as aplicações: [Web](https://github.com/Jonathan-Rios/nlw-return-widback-web.git) [Mobile](https://github.com/Jonathan-Rios/nlw-return-widback-mobile.git)
+Caso queira ver em funcionamento total, veja as aplicações [Web](https://github.com/Jonathan-Rios/nlw-return-widback-web.git) ou [Mobile](https://github.com/Jonathan-Rios/nlw-return-widback-mobile.git)
 
 ## 🔖 Layout ( Front-end )
 
