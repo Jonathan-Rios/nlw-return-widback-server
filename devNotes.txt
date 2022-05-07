@@ -1,0 +1,88 @@
+Criando do zero!
+
+➜ npm init -y //Criar package.json
+➜ npm i typescript @types/node ts-node-dev -D
+➜ npx tsc --init //Criar tsconfig.json
+
+- No arquivo tsconfig configuramos o seguinte:
+
+"target": "es2020", //alterado de es2016 -> es2020 pois o node permite versões mais recentes ( diferente dos browsers )
+"rootDir": "./src", // Pasta raiz
+"outDir": "./dist", // Destino do tsc
+
+- Adicionamos no package.json o script de run dev:
+"dev": "ts-node-dev src/server.ts"
+
+➜ npm i express //Agora quando acessa o site do npm, ao lado do nome tem um "DT" ( que informa se houver types)
+➜ npm i -D @types/express 
+
+➜ npm i -D prisma 
+➜ npm i @prisma/client
+
+npx prisma init // Cria a pasta do prisma, e o .env e ·gitignore junto com suas configs particulares
+
+- Depois configure para rodar SQLite e não default(Postgres) https://www.prisma.io/docs/concepts/database-connectors/sqlite
+
+- Após criar no schema.prisma o model feedbacks, rodamos:
+➜ npx prisma migrate dev
+- Demos o nome do migration: create_feedbacks
+➜ npx prisma studio // Para acessar a interface do prisma e ver o banco!
+
+- Envio de email
+➜ npm i nodemailer
+➜ npm i -D @types/nodemailer 
+// Nesse projeto vamos utilizar um serviço de envio de email para testes https://mailtrap.io/,ele já tem o padrão de envio por node com nodemailer O.o
+// Daria para usar a própria conta do Gmail que permite 100 por dia.
+
+➜ npm i -D jest
+➜ npm i -D @types/jest
+➜ npx jest --init
+  // Configurando o JEST
+  ✔ Would you like to use Jest when running "test" script in "package.json"? … yes
+  ✔ Would you like to use Typescript for the configuration file? … yes
+  ✔ Choose the test environment that will be used for testing › node
+  ✔ Do you want Jest to add coverage reports? … yes
+  ✔ Which provider should be used to instrument code for coverage? › v8
+  ✔ Automatically clear mock calls, instances, contexts and results before every test? … yes
+  ✏️  Modified /home/john/Studies/rocketseat/nlwreturn/server/package.json
+
+➜ npm i -D ts-node // Necessário para o Jest
+➜ npm i -D jest @swc/jest //Transpilador muito rápido para usar em testes.(da para usar no projeto tbm, mas n vai ser usado nesse.)
+//swc-jest: Adicionar no jest.config.ts
+transform: {
+  "^.+\\.(t|j)sx?$": ["@swc/jest"],
+},
+➜ npm i cors 
+➜ npm i -D @types/cors
+
+
+SOLID - 5 Princípios da programação, para deixar o código mais escalável, testável e manutenível.
+1- Single Responsibility
+2- Open/Close Principle
+3- Liskov Substitution Principle
+4- Interface Segregation Principle
+5- Dependency Inversion Principle
+
+
+1. Cada classe tem uma responsabilidade única;
+  Ex. tenho essa função ela envia email E.... ( esse é mata possivelmente foge do conceito ).
+
+2. As classes da aplicação devem ser abertas para extensão mas fechadas para modificação;
+  Ex. Nem toda aplicação usa ex. essa, está mais para o lado de orientação a objeto - Se tenho uma classe que faz uma ação, e tenho uma classe que estende dela, ele não deveria conseguir modificar o funcionamento da classe original.
+
+3. Nós devemos poder substituir uma classe pai por uma herança dela e tudo continuar funcionando;
+  Ex As heranças devem incorporar o funcionamento da classe pai, Ex. class Ave, class Gavião (herda de Ave), se eu colocar Gavião em uma Utilização da Class Ave, deveria suprir todas as funcionalidades já que incorporou do pai.
+
+4. Utilizamos bastante já por causa das tipagens, não vale apena ir a fundo mas como exemplo:
+    Tendo uma impressora chamada MegaImpressora que pode: Imprimir, Digitalizar, Copiar
+    
+    Ao implementar isso em class, a ideia é dividir essas operações o máximo que conseguir, ao invés de só juntar tudo em MegaImpressora: 
+    - Isso: 
+      class Impressora implements Imprimir, Digitalizar, Copiar  
+    - Ao invés de: 
+      class Impressora implements MegaImpressora
+5. inverter as dependências de nossa classe, ex. Ao invés de uma class buscar as dependências que ela precisa, o contexto externo fala para ela quais dependências ela vai usar. 
+Ex. Class criação de feedback e Nodemailer (Contexto externo), o Nodemailer dizer o que ela vai usar.
+Obs. isso auxilia muito para os teste, e o conceito que mais nos interessa.
+Como utilizar: Em uma função de rotas, essa rota tem controle sobre o Banco ou o Envio de Email ? não se ele cair, vai afetar e não temos como controlar isso.
+Com isso criamos interfaces para dizer quais funções esses recursos usam
