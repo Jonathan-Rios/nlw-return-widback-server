@@ -48,11 +48,11 @@ $ npm run start
 # Iniciar o projeto em desenvolvimento
 $ npm run dev
 ```
-O servidor estará disponível pelo endereço http://localhost:3333. e só consta com uma rota do tipo <i>POST</i>:
+O servidor estará disponível pelo endereço http://localhost:3333. 
 
-http://localhost:3333/feedbacks.
+O servidor só uma única rota <i>POST</i>: http://localhost:3333/feedbacks.
 
-Onde se espera um Body <strong>JSON</strong> do seguinte formato, sendo screenshot opcional:
+No corpo dessa requisição se espera o formato: <strong>JSON</strong> do seguinte formato, sendo screenshot opcional:
 
 ```json
 {
